@@ -1,8 +1,14 @@
 const express = require('express');
 const app = express();
 
-app.get('/', (request, response) => {
-    response.send('Hello world!');
-});
+app.use(express.static(__dirname + '/../public'));
 
-module.exports = app;
+const http = require('http').createServer(app);
+const socket = require('./socket');
+socket(http);
+
+// app.get('/', (request, response) => {
+//     response.send('Hello world!');
+// });
+
+module.exports = http;
