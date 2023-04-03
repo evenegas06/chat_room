@@ -7,68 +7,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sellia - Prueba técnica</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
-    <section id="app" class="hero is-fullheight">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">Chat</h1>
-                <template v-if="step === 'nick'">
-                    <div class="columns">
-                        <div class="column is-6">
-                            <div class="field has-addons">
-                                <div class="control is-expanded">
-                                    <input v-model="nick" class="input is-medium" type="text"
-                                        placeholder="Ingrese su nick">
-                                </div>
-                                <div class="control">
-                                    <a @click="signIn" class="button is-info is-medium">
-                                        Ingresar
-                                    </a>
-                                </div>
-                            </div>
+    <section id="app" class="">
+        <div class="container">
+            <h1 class="title">Chat</h1>
+            <template v-if="step === 'nick'">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-8">
+                        <div class="card">
+                            <input v-model="nick" class="form-control" type="text"
+                                placeholder="Ingrese su nombre de usuario">
                         </div>
-                    </div>
-                </template>
-
-                <template v-else>
-                    <div v-if="messages.length" class="chat-container">
-                        <div v-for="item in messages" :class="{ 'has-text-right': nick === item.nick }">
-                            <div class="box chat-message" :class="{ 'me': nick === item.nick }">
-                                <span class="has-text-weight-bold">{{ item.nick }}</span> - {{ item.message }}
-                                <span
-                                    class="is-italic has-text-grey-light is-size-7">{{ new Date(item.date).toLocaleTimeString() }}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="field has-addons">
-                        <div class="control is-expanded">
-                            <input v-model="message" class="input is-medium" type="text"
-                                placeholder="Ingrese el mensaje">
-                        </div>
-                        <div class="control">
-                            <a @click="send" class="button is-info is-medium">
-                                Enviar
+                        <div class="my-3">
+                            <a @click="signIn" class="btn btn-primary">
+                                Ingresar
                             </a>
                         </div>
                     </div>
-                </template>
-            </div>
+                </div>
+            </template>
+
+            <template v-else>
+                <div v-if="messages.length" class="chat-container">
+                    <div class="row">
+                        <div v-for="item in messages" :class="{ 'col-12 text-end': nick === item.nick }">
+                            <div class="box chat-message p-2"
+                                :class="{ 'me': nick === item.nick, 'bg-white': nick !== item.nick }"
+                            >
+                                <strong>{{ item.nick }}</strong> - {{ item.message }}
+                                <small class="mx-2">
+                                    <em class="is-italic has-text-grey-light is-size-7">
+                                        {{ new Date(item.date).toLocaleTimeString() }}
+                                    </em>
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input v-model="message" class="form-control" type="text" placeholder="Ingrese el mensaje">
+                <div class="my-3">
+                    <a @click="send" class="btn btn-primary">
+                        Enviar
+                    </a>
+                </div>
+            </template>
         </div>
-        <footer v-if="step === 'chat'" class="hero-foot">
-            <div class="container section has-text-centered">
-                <p>Conectado como <b>{{ nick }}</b></p>
+        <footer v-if="step === 'chat'" class="text-center">
+            <div class="">
+                <p>Conectado como <strong>{{ nick }}</strong></p>
             </div>
         </footer>
     </section>
 
     <script src="/socket.io/socket.io.js"></script>
-    
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="./chat.js"></script>
 
