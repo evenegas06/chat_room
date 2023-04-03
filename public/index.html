@@ -38,8 +38,7 @@
                     <div class="row">
                         <div v-for="item in messages" :class="{ 'col-12 text-end': nick === item.nick }">
                             <div class="box chat-message p-2"
-                                :class="{ 'me': nick === item.nick, 'bg-white': nick !== item.nick }"
-                            >
+                                :class="{ 'me': nick === item.nick, 'bg-white': nick !== item.nick }">
                                 <strong>{{ item.nick }}</strong> - {{ item.message }}
                                 <small class="mx-2">
                                     <em class="is-italic has-text-grey-light is-size-7">
