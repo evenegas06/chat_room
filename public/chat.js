@@ -4,8 +4,8 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            step: 'nick',
-            nick: null,
+            step: 'user',
+            user: null,
             message: null,
             messages: [],
         };
@@ -13,7 +13,7 @@ createApp({
     methods: {
         send() {
             socket.emit('chat-message', {
-                nick: this.nick,
+                user: this.user,
                 message: this.message,
                 date: new Date().getTime()
             });
@@ -21,7 +21,7 @@ createApp({
             this.message = null;
         },
         signIn() {
-            if (!this.nick) {
+            if (!this.user) {
                 return;
             }
 

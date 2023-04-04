@@ -17,11 +17,11 @@
     <section id="app" class="">
         <div class="container">
             <h1 class="title">Chat</h1>
-            <template v-if="step === 'nick'">
+            <template v-if="step === 'user'">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-8">
                         <div class="card">
-                            <input v-model="nick" class="form-control" type="text"
+                            <input v-model="user" class="form-control" type="text"
                                 placeholder="Ingrese su nombre de usuario">
                         </div>
                         <div class="my-3">
@@ -36,10 +36,10 @@
             <template v-else>
                 <div v-if="messages.length" class="chat-container">
                     <div class="row">
-                        <div v-for="item in messages" :class="{ 'col-12 text-end': nick === item.nick }">
+                        <div v-for="item in messages" :class="{ 'col-12 text-end': user === item.user }">
                             <div class="box chat-message p-2"
-                                :class="{ 'me': nick === item.nick, 'bg-white': nick !== item.nick }">
-                                <strong>{{ item.nick }}</strong> - {{ item.message }}
+                                :class="{ 'me': user === item.user, 'bg-white': user !== item.user }">
+                                <strong>{{ item.user }}</strong> - {{ item.message }}
                                 <small class="mx-2">
                                     <em class="is-italic has-text-grey-light is-size-7">
                                         {{ new Date(item.date).toLocaleTimeString() }}
@@ -60,7 +60,7 @@
         </div>
         <footer v-if="step === 'chat'" class="text-center">
             <div class="">
-                <p>Conectado como <strong>{{ nick }}</strong></p>
+                <p>Conectado como <strong>{{ user }}</strong></p>
             </div>
         </footer>
     </section>
